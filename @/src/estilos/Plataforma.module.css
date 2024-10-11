@@ -1,0 +1,105 @@
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(80, 58, 209);
+  padding: 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.tituloUsuario {
+  font-size: 24px;
+  color: #333;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+
+.cuentasContenedor {
+  background-color: rgb(210, 203, 255);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tituloCuentas {
+  font-size: 16px;
+  color:  rgb(80, 58, 209);
+  text-align: right;
+  margin-bottom: 20px;
+}
+.tituloUsuario{
+  font-size: 40px;
+  color: rgb(255, 255, 255);
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.informacionCuenta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tipoCuenta, .telefono {
+  font-size: 30px;
+  color:  rgb(255, 255, 255);
+}
+
+.saldoSubcontenedor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.saldoDisponible {
+  font-size: 20px;
+  color:   rgb(80, 58, 209);
+}
+
+.saldoMonto {
+  font-size: 36px;
+  font-weight: bold;
+  color:  rgb(255, 255, 255);
+}
+
+.imagenSaldo img {
+  width: 500px;
+  height: 300px;
+}
+
+.botonera {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+  
+}
+
+.botonAccion {
+  background-color: #503ad1;
+  color:  rgb(255, 255, 255);
+  padding: 20px;
+  margin: 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  width: 22%;
+  height: 200px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.botonAccion:hover {
+  background-color: rgb(80, 58, 209);
+}
+.botonAccion i {
+    font-size: 70px; 
+    display: block;
+    margin-bottom: 50px; 
+  }

@@ -1,0 +1,45 @@
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(80, 58, 209);
+    padding: 10px 20px;
+    width: 100vh;
+    height: 50px; 
+    box-sizing: border-box; 
+  }
+  
+  .logo {
+    color: #fff;
+    font-family: 'Qwitcher Grypen', cursive;
+    font-size: 36px;
+    margin-left: 10px;
+  }
+  
+  .nav {
+    display: flex;
+    gap: 30px; 
+    margin-left: auto; 
+  }
+  
+  .menuItem {
+    color: #fff;
+    font-size: 18px;
+    font-family: 'Arial', sans-serif;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center; 
+    gap: 8px; 
+  }
+  
+  .menuItem:hover {
+    background-color: rgb(210, 203, 255);
+  }
+  
+  .menuItem i {
+    font-size: 24px; 
+  }
+  
