@@ -59,18 +59,18 @@
 }
 
 .saldoDisponible {
-  font-size: 20px;
+  font-size: 30px;
   color:   rgb(80, 58, 209);
 }
 
 .saldoMonto {
-  font-size: 36px;
+  font-size: 50px;
   font-weight: bold;
   color:  rgb(255, 255, 255);
 }
 
 .imagenSaldo img {
-  width: 500px;
+  width: 700px;
   height: 300px;
 }
 
