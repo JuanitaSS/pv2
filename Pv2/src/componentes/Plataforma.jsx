@@ -1,24 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Menu from './Menu';
 import estilos from '../estilos/Plataforma.module.css';
 
 function Plataforma() {
-  const saldoDisponible = 3500.75; 
+  const location = useLocation();
+  const user = location.state?.user; 
+  if (!user) {
+    return <p>Error: No se encontró información del usuario.</p>; 
+  }
+  const saldoDisponible = Number(user[0]?.saldo);
 
   return (
     <div>
       <Menu />
 
-      <h1 className={estilos.tituloUsuario}>Hola querido usuario</h1>
+      <h1 className={estilos.tituloUsuario}>Hola, {user[0]?.nombre}</h1> 
 
       <div className={estilos.cuentasContenedor}>
         <div className={estilos.tituloCuentas}>Tus cuentas</div>
 
         <div className={estilos.contenedorMorado}>
           <div className={estilos.informacionCuenta}>
-            <div className={estilos.tipoCuenta}>Cuenta Ahorros</div>
-            <div className={estilos.telefono}>Tel: 987654321</div>
+            <div className={estilos.tipoCuenta}>Cuenta de {user[0]?.tipo}</div>
+            <div className={estilos.telefono}>Tel: {user[0]?.numcuenta}</div>
           </div>
 
           <div className={estilos.saldoSubcontenedor}>

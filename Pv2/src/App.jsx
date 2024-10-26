@@ -18,14 +18,14 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Principal />} />
-        <Route path='/Login' element={<Login/>} />
-        <Route path='/Registro' element={<Registro/>} />
-        <Route path='/Plataforma' element={<Plataforma/>} />
-        <Route path='/Saldos' element={<Saldos/>} />
-        <Route path='/Pago' element={<Pago/>} />
-        <Route path='/Transferencias' element={<Transferencias/>} />
-        <Route path='/Prestamos' element={<Prestamos/>} />
-        <Route path='/Yo' element={<Yo/>} />
+        <Route path='/login' element={<Login/>} />
+        <Route path='/registro' element={<Registro/>} />
+        <Route path='/plataforma' element={<Plataforma/>} />
+        <Route path='/saldos' element={<Saldos/>} />
+        <Route path='/pago' element={<Pago/>} />
+        <Route path='/transferencias' element={<Transferencias/>} />
+        <Route path='/prestamos' element={<Prestamos/>} />
+        <Route path='/yo' element={<Yo/>} />
 
       </Routes>
     </BrowserRouter>
