@@ -1,8 +1,22 @@
-import React from 'react';
+import {React, useState} from 'react';
 import Menu from './Menu';
+import { useLocation } from 'react-router-dom';
 import estilos from '../estilos/Saldos.module.css';
-
 function Saldos() {
+  const [transfer, setTransfer] = useState([]);
+  const location = useLocation();
+  const user = location.state;
+  fetch('http://localhost:3001/transfer', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+    body: JSON.stringify({idUsuario: user[0]?.idUsuario}),
+  })
+    .then((data) => data.json())
+    .then((info) => {
+      setTransfer(info);
+    })
+    .catch((err) => console.error("Error al consultar transferencias:", err));
+    const trans = transfer;
   return (
     <div>
 
@@ -23,31 +37,14 @@ function Saldos() {
             </tr>
           </thead>
           <tbody>
-
-            <tr>
-              <td>01/10/2024</td>
-              <td>Depósito</td>
-              <td>bancolombia1</td>
-              <td>$500.00</td>
+            {trans.map((transferencia)=>(
+              <tr>
+              <td>{transferencia?.fecha}</td>{console.log(transferencia?.fecha)}
+              <td>{transferencia?.tipo}</td>
+              <td>{transferencia?.cuentadestino}</td>
+              <td>{transferencia?.monto}</td>
             </tr>
-            <tr>
-              <td>02/10/2024</td>
-              <td>Retiro</td>
-              <td>Corrientatos</td>
-              <td>$150.00</td>
-            </tr>
-            <tr>
-              <td>03/10/2024</td>
-              <td>Retiro</td>
-              <td>un bancox</td>
-              <td>$120.00</td>
-            </tr>
-            <tr>
-              <td>04/10/2024</td>
-              <td>Retiro</td>
-              <td>Un banquito</td>
-              <td>$130.00</td>
-            </tr>
+            ))}
           </tbody>
         </table>
       </div>
