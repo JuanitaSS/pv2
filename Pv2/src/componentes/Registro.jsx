@@ -11,14 +11,20 @@ function Registro() {
 
   const navigate = useNavigate(); 
 
-  const manejarEnvio = (e) => {
-    e.preventDefault();
-
-    console.log({ nombre, correo, contrasena, celular, tipoCuenta });
-
-
-    navigate('/Plataforma');
-  };
+  const manejarEnvio = (evento) => {
+      evento.preventDefault();
+      const data = {nombre:nombre, email: correo, contraseña: contrasena, numcuenta:celular,tipo:tipoCuenta};
+      fetch('http://localhost:3001/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        body: JSON.stringify(data),
+      })
+        .then((data) => data.json())
+        .then((info) => {
+          navigate('/login');
+        })
+        .catch((err) => console.error("Error al autenticar usuario:", err));
+    };
 
   return (
     <div className={estilos.contenedor}>
