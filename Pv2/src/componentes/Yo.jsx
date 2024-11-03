@@ -1,16 +1,19 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import estilos from '../estilos/Yo.module.css'; 
 
 function Yo() {
   const navigate = useNavigate();
-
+  
+  const location = useLocation();
+  const user = location.state?.user;
 
   const usuario = {
-    nombre: 'Juanita Solórzano',
-    email: 'juanita.ss@gmail.com',
-    numeroCuenta: '123456789',
-    tipoCuenta: 'Ahorros',
+    nombre: user[0]?.nombre,
+    email: user[0]?.email,
+    numeroCuenta: user[0]?.numcuenta,
+    tipoCuenta: user[0]?.tipo,
   };
 
   const manejarSalir = () => {
@@ -20,7 +23,7 @@ function Yo() {
 
   const manejarRegresar = () => {
 
-    navigate('/plataforma'); 
+    navigate('/plataforma', { state: { user } }); 
   };
 
   return (
