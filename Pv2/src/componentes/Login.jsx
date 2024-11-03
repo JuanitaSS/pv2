@@ -30,24 +30,26 @@ function Login() {
       <div className={estilos.cajaLogin}>
         <form onSubmit={userAuth}>
           <div className={estilos.grupoInput}>
-            <label htmlFor="correo">Correo Electrónico</label>
+            <label htmlFor="email">Correo Electrónico</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              autocomplete="email"
             />
           </div>
 
           <div className={estilos.grupoInput}>
-            <label htmlFor="contraseña">Contraseña</label>
+            <label htmlFor="password">Contraseña</label>
             <input
               type="password"
               id="contraseña"
               value={contraseña}
               onChange={(e) => setContraseña(e.target.value)}
               required
+              autocomplete="current-password"
             />
           </div>
 
