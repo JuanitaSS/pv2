@@ -42,22 +42,22 @@ function Plataforma() {
       </div>
 
       <div className={estilos.botonera}>
-        <Link to="/saldos" state ={user} className={estilos.botonAccion}>
+        <Link to="/saldos" state={{ user }} className={estilos.botonAccion}>
           <i className="material-icons">date_range</i> 
           Saldos y Movimientos
         </Link>
         
-        <Link to="/transferencias" state ={user} className={estilos.botonAccion}>
+        <Link to="/transferencias" state={{ user }} className={estilos.botonAccion}>
           <i className="material-icons">near_me</i> 
           Transferencias
         </Link>
         
-        <Link to="/prestamos" state ={user} className={estilos.botonAccion}>
+        <Link to="/prestamos" state={{ user }} className={estilos.botonAccion}>
           <i className="material-icons">business_center</i> 
           Préstamos
         </Link>
         
-        <Link to="/pago" state ={user} className={estilos.botonAccion}>
+        <Link to="/pago" state={{ user }} className={estilos.botonAccion}>
           <i className="material-icons">attach_money</i> 
           Pago de Créditos
         </Link>
