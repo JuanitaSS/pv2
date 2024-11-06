@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 function Transferencias() {
   const [cuentaDestino, setCuentaDestino] = useState('');
   const [valorTransferir, setValorTransferir] = useState('');
-  const [tipoTransferencia, setTipoTransferencia] = useState('normal');
+  const [tipoTransferencia, setTipoTransferencia] = useState('');
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,14 +23,19 @@ function Transferencias() {
       fecha: format(new Date(), 'yyyy-MM-dd HH:mm:ss') 
     };
 
-    fetch('http://localhost:3001/transfer', {
+    console.log("Enviando datos al backend:", data); // Verifica los datos que se están enviando
+
+    fetch('http://localhost:3001/transferir', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        console.log("Respuesta del backend:", response);
+        return response.json();
+      })
       .then((result) => {
-        console.log(result);
+        console.log("Resultado del backend:", result); 
         alert('Transferencia exitosa');
         navigate('/plataforma', { state: { user } });
       })
@@ -45,9 +50,7 @@ function Transferencias() {
     setTipoTransferencia(newTipoTransferencia);
     if (newTipoTransferencia === 'normal') {
       setCuentaDestino(''); 
-    } else if (newTipoTransferencia === 'depositar') {
-      setCuentaDestino(user[0]?.numcuenta); 
-    } else if (newTipoTransferencia === 'retirar') {
+    } else if (newTipoTransferencia === 'depositar' || newTipoTransferencia === 'retirar') {
       setCuentaDestino(user[0]?.numcuenta); 
     }
   };
