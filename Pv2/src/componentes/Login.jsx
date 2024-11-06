@@ -16,7 +16,16 @@ function Login() {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
       body: JSON.stringify(data),
     })
-      .then((data) => data.json())
+      .then(async (response) => 
+        {
+          if (!response.ok) 
+            {
+              const errorData = await response.json();
+              alert(errorData.message);
+            throw new Error(errorData.message || 'Error de autenticación'); // Captura el mensaje de error del backend
+            }
+            return response.json();
+        })
       .then((info) => {
         setUser(info);
         navigate('/Plataforma', { state: { user: info } });
