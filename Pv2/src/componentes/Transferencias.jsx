@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 function Transferencias() {
   const [cuentaDestino, setCuentaDestino] = useState('');
   const [valorTransferir, setValorTransferir] = useState('');
-  const [tipoTransferencia, setTipoTransferencia] = useState('');
+  const [tipoTransferencia, setTipoTransferencia] = useState('normal');
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,9 +16,9 @@ function Transferencias() {
   const manejarEnvio = (e) => {
     e.preventDefault();
     const data = {
-      cuentaDestino,
-      valorTransferir,
-      tipoTransferencia,
+      cuentaDestino: cuentaDestino,
+      valorTransferir: valorTransferir,
+      tipoTransferencia: tipoTransferencia,
       idUsuario: user[0]?.idUsuario,
       fecha: format(new Date(), 'yyyy-MM-dd HH:mm:ss') 
     };
@@ -49,7 +49,7 @@ function Transferencias() {
     const newTipoTransferencia = e.target.value;
     setTipoTransferencia(newTipoTransferencia);
     if (newTipoTransferencia === 'normal') {
-      setCuentaDestino(''); 
+      setCuentaDestino('normal'); 
     } else if (newTipoTransferencia === 'depositar' || newTipoTransferencia === 'retirar') {
       setCuentaDestino(user[0]?.numcuenta); 
     }
