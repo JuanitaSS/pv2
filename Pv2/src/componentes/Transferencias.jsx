@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 function Transferencias() {
   const [cuentaDestino, setCuentaDestino] = useState('');
   const [valorTransferir, setValorTransferir] = useState('');
-  const [tipoTransferencia, setTipoTransferencia] = useState('');
+  const [tipoTransferencia, setTipoTransferencia] = useState('normal');
   
   const navigate = useNavigate();
   const location = useLocation();
