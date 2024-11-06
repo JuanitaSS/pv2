@@ -1,20 +1,58 @@
 import React, { useState } from 'react';
 import Menu from './Menu';
 import estilos from '../estilos/Transferencias.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { format } from 'date-fns';
 
 function Transferencias() {
   const [cuentaDestino, setCuentaDestino] = useState('');
   const [valorTransferir, setValorTransferir] = useState('');
-  const [tipoTransferencia, setTipoTransferencia] = useState('normal');
+  const [tipoTransferencia, setTipoTransferencia] = useState('');
   
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const user = location.state?.user;
 
   const manejarEnvio = (e) => {
     e.preventDefault();
-    console.log({ cuentaDestino, valorTransferir, tipoTransferencia });
-    alert('Transferencia exitosa');
-    navigate('/plataforma'); 
+    const data = {
+      cuentaDestino,
+      valorTransferir,
+      tipoTransferencia,
+      idUsuario: user[0]?.idUsuario,
+      fecha: format(new Date(), 'yyyy-MM-dd HH:mm:ss') 
+    };
+
+    console.log("Enviando datos al backend:", data); // Verifica los datos que se están enviando
+
+    fetch('http://localhost:3001/transferir', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        console.log("Respuesta del backend:", response);
+        return response.json();
+      })
+      .then((result) => {
+        console.log("Resultado del backend:", result); 
+        alert('Transferencia exitosa');
+        navigate('/plataforma', { state: { user } });
+      })
+      .catch((error) => {
+        console.error('Error al realizar la transferencia:', error);
+        alert('Error al realizar la transferencia');
+      });
+  };
+
+  const handleTipoTransferenciaChange = (e) => {
+    const newTipoTransferencia = e.target.value;
+    setTipoTransferencia(newTipoTransferencia);
+    if (newTipoTransferencia === 'normal') {
+      setCuentaDestino(''); 
+    } else if (newTipoTransferencia === 'depositar' || newTipoTransferencia === 'retirar') {
+      setCuentaDestino(user[0]?.numcuenta); 
+    }
   };
 
   return (
@@ -26,17 +64,16 @@ function Transferencias() {
         <form className={estilos.formulario} onSubmit={manejarEnvio}>
 
           <div className={estilos.grupoInput}>
-            <label htmlFor="cuentaDestino">Cuenta de Destino
-               (ponga  propia si es para retirar o depositar)</label>
+            <label htmlFor="cuentaDestino">Cuenta de Destino</label>
             <input
               type="text"
               id="cuentaDestino"
               value={cuentaDestino}
               onChange={(e) => setCuentaDestino(e.target.value)}
               required
+              disabled={tipoTransferencia === 'depositar' || tipoTransferencia === 'retirar'} 
             />
           </div>
-
 
           <div className={estilos.grupoInput}>
             <label htmlFor="valorTransferir">Valor a Transferir</label>
@@ -54,11 +91,11 @@ function Transferencias() {
             <select
               id="tipoTransferencia"
               value={tipoTransferencia}
-              onChange={(e) => setTipoTransferencia(e.target.value)}
+              onChange={handleTipoTransferenciaChange}
             >
               <option value="normal">Transferir</option>
-              <option value="urgente">Depositar</option>
-              <option value="urgente">Retirar</option>
+              <option value="depositar">Depositar</option>
+              <option value="retirar">Retirar</option>
             </select>
           </div>
 
